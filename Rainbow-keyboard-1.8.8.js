@@ -188,7 +188,7 @@
     `;
     document.body.appendChild(bottomRightContainer);
 
-    // 创建右上角菜单按钮（新增）
+    // 创建右上角菜单按钮
     const topRightContainer = document.createElement('div');
     topRightContainer.className = 'control-group top-right-controls';
     topRightContainer.innerHTML = `
@@ -200,7 +200,7 @@
     `;
     document.body.appendChild(topRightContainer);
 
-    // 创建左侧方向控制键
+    // 创建左侧方向控制键 - 这里将原跳跃键替换为Shift键
     const leftContainer = document.createElement('div');
     leftContainer.className = 'direction-controls';
     leftContainer.innerHTML = `
@@ -217,14 +217,15 @@
             <button class="dir-btn right" data-key="d">
                 <div class="triangle triangle-right"></div>
             </button>
-            <button class="dir-btn jump" data-key=" ">
-                <div class="square"></div>
+            <!-- 原跳跃键位置现在放置Shift键 -->
+            <button class="dir-btn jump shift-btn" data-key="Shift">
+                <div class="solid-square"></div>
             </button>
         </div>
     `;
     document.body.appendChild(leftContainer);
 
-    // 创建右侧功能键
+    // 创建右侧功能键 - 这里将原Shift键位置替换为跳跃键（空格键）
     const rightContainer = document.createElement('div');
     rightContainer.className = 'right-controls';
     rightContainer.innerHTML = `
@@ -239,8 +240,9 @@
             </button>
         </div>
         <div class="right-vertical">
-            <button class="shift-btn" data-key="Shift">
-                <div class="solid-square"></div>
+            <!-- 原Shift键位置现在放置跳跃键（空格键） -->
+            <button class="shift-btn jump" data-key=" ">
+                <div class="square"></div>
             </button>
             <button class="plus-btn" data-action="right-click">+</button>
         </div>
@@ -326,7 +328,7 @@
         document.dispatchEvent(event);
     }
 
-    // 切换控制按钮显示/隐藏（新增功能）
+    // 切换控制按钮显示/隐藏
     function toggleControls() {
         const allControls = document.querySelectorAll(
             '.top-left-controls, .bottom-right-controls, .direction-controls, .right-controls'
@@ -382,7 +384,6 @@
                 simulateMouseClick('mouseup', false);
             });
         } else if (button.dataset.action === 'toggle-controls') {
-            // 绑定菜单按钮事件（新增）
             button.addEventListener('click', toggleControls);
             button.addEventListener('touchstart', (e) => {
                 e.preventDefault();
